@@ -82,5 +82,7 @@ export async function setSequenceStatus(
  * blasting all queued emails the moment the user clicks Resume.
  */
 export function computeNextSendTime(prevSentAt: Date, delayDays: number): Date {
-  return new Date(prevSentAt.getTime() + delayDays * 24 * 60 * 60);
+  // getTime() is in milliseconds, so the delay must be converted to ms too.
+  // The original omitted the `* 1000`, making "1 day" ~86 seconds (1000x short).
+  return new Date(prevSentAt.getTime() + delayDays * 24 * 60 * 60 * 1000);
 }

@@ -13,7 +13,7 @@ export function requireAuth(req: AuthedRequest, res: Response, next: NextFunctio
   }
   const token = header.slice('Bearer '.length);
   try {
-    const payload = jwt.verify(token, env.jwtSecret) as { sub: number };
+    const payload = jwt.verify(token, env.jwtSecret) as unknown as { sub: number };
     req.userId = Number(payload.sub);
     return next();
   } catch {

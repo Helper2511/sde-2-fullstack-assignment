@@ -6,7 +6,7 @@ import sequencesRoutes, { scheduledEmailRouter } from './sequences/routes';
 import mailboxesRoutes from './mailboxes/routes';
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: env.corsOrigins, credentials: true }));
 app.use(express.json());
 
 app.get('/health', (_req, res) => res.json({ ok: true }));
